@@ -6,6 +6,7 @@
     <article>
         <h1>{{ pin.title}} </h1>
         <p> {{ pin.description}}</p>
+        <a href="{{path('app_pins_edit', {id:pin.id}) }}">Editer</a>
 
         <a href="{{path('app_home')}}">Retour à la page d'accueil</a>
     </article>
