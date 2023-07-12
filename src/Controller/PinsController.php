@@ -28,7 +28,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show" , methods="GET")
+     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show" , methods="GET"priority="-1")
      */
     public function show(Pin $pin): Response
     {
@@ -38,7 +38,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/create", name="app_pins_create", methods="GET|POST")
+     * @Route("/pins/create", name="app_pins_create", methods="GET|POST", priority="1")
      */
     public function create(Request $request, EntityManagerInterface $em): Response
     {
