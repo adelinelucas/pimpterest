@@ -60,7 +60,7 @@ class PinsController extends AbstractController
         }
 
         return $this->render('pins/create.html.twig',[
-            'createPin' => $form->createView(),
+            'pinForm' => $form->createView(),
         ]);
     }
 
@@ -85,7 +85,7 @@ class PinsController extends AbstractController
 
         return $this->render('pins/edit.html.twig',[
             'pin' => $pin,
-           'editPin' => $form->createView()
+           'pinForm' => $form->createView()
         ]);
     }
 

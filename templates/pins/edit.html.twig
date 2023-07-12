@@ -4,10 +4,5 @@
 
 {% block body %}
     <h1>Edit Pin # {{pin.id}} </h1>
-    {{ form_start(editPin)}}
-
-        {{ form_widget(editPin )}}
-        <input type="submit" value="Editer le Pin" />
-    {{ form_end(editPin)}}
-
+    {{ include('pins/_form.html.twig', {submitButtonText : "Mettre à jour le Pin"}) }}
 {% endblock %}
