@@ -32,6 +32,7 @@ class PinType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer l\'image',
                 'download_uri' => false,
+                'imagine_pattern' => 'square_thumbnail_small'
                 // 'constraints'=>[
                 //     new Image(['maxSize'=>'1M'])
                 // ]
