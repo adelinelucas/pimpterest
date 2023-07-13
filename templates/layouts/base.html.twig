@@ -8,12 +8,29 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
+        <style>
+            .alert {
+                padding:10px;
+                color:white;
+                text-align:center;
+            }
+            .alert-success{
+                background-color : green;
+            }
+            .alert-info{
+                background-color : blue;
+            }
+            .alert-error{
+                background-color : red;
+            }
+        </style>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
+        {{include('./layouts/partials/_flash_message.html.twig')}}
+
         <nav>
             <ul>
                 <li>
