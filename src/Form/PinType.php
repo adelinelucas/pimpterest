@@ -6,6 +6,7 @@ use App\Entity\Pin;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\Image;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -13,6 +14,17 @@ class PinType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        // ajouter des contraintes uniquement pour l'édition du form - récupération de la methode utilisée
+        // $imageFileConstraints = [];
+        // $isEdit = $options['method'] === 'PUT';
+        // if($isEdit){
+        //     $imageFileConstraints[] = 
+        // }
+
+        // method 2 - récupération de l'id
+        // $pin = $options['data'];
+        // $isEdit = $pin && $pin->getId();   
+
         $builder
             ->add('imageFile', VichImageType::class, [
                 'label'=> 'Image(JPG or PNG file)',
@@ -20,6 +32,9 @@ class PinType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Supprimer l\'image',
                 'download_uri' => false,
+                // 'constraints'=>[
+                //     new Image(['maxSize'=>'1M'])
+                // ]
             ])
             ->add('title')
             ->add('description')
