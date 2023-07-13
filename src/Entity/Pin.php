@@ -40,7 +40,7 @@ class Pin
     private $description;
 
     /**
-     * Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
+     * @Vich\UploadableField(mapping="pin_image", fileNameProperty="imageName")
      */
     private $imageFile;
 
