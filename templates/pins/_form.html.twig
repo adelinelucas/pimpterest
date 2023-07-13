@@ -1,4 +1,4 @@
 {{ form_start(pinForm)}}
     {{ form_widget(pinForm )}}
-    <input type="submit" value="{{submitButtonText|default("Créer un nouveau Pin") }}" />
+    <input type="submit" value="{{submitButtonText|default("Créer un nouveau Pin") }}"  formnovalidate/>
 {{ form_end(pinForm)}}
