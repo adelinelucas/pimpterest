@@ -24,3 +24,20 @@ body {
 .alert-error{
     background-color : red;
 }
+
+.vich-image {
+    .form-check{
+        margin-top: 20px;
+    }
+   img{
+        margin-bottom: 10px;
+        border-radius: 0.25rem;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+        padding: 0.25rem;
+        background-color: var(--bs-body-bg);
+        border: var(--bs-border-width) solid var(--bs-border-color);
+        border-radius: var(--bs-border-radius);
+        max-width: 100%;
+        height: auto;
+   }
+}
