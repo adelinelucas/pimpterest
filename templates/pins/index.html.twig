@@ -11,9 +11,9 @@
                 {% for pin in row %}
                     <div class="col-md-4">
                         <article class="pin bg-white rounded shadow">
-                            <div class="mw-100 overflow-hidden">
+                            <div class="mw-100 overflow-hidden rounded-top">
                                 <a href="{{ path('app_pins_show', {id:pin.id}) }}">
-                                    <img src="{{ ( pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeHolder.png') ) | imagine_filter('square_thumbnail_small') }}"  alt="{{pin.title }}" class="w-100 rounded-top"/>
+                                    <img src="{{ ( pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeHolder.png') ) | imagine_filter('square_thumbnail_small') }}"  alt="{{pin.title }}" class="w-100 "/>
                                 </a>
                             </div>
                             <h2 class="h5 ps-3 pt-3"><a href="{{ path('app_pins_show', {id:pin.id }) }}" class="text-decoration-none text-secondary">{{ pin.title}}</a></h2>
