@@ -11,7 +11,7 @@
                         <img src="{{ ( pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeHolder.png') ) | imagine_filter('square_thumbnail_small') }}"  alt="{{pin.title }}" class="w-100 rounded-top"/>
                     </a>
                 </div>
-                <h2 class="h5 ps-3 pt-3"><a href="{{ path('app_pins_show', {id:pin.id }) }}" class="text-decoration-none text-secondary">{{ pin.title}}</a></h2>
+                <h1 class="h5 ps-3 pt-3"><a href="{{ path('app_pins_show', {id:pin.id }) }}" class="text-decoration-none text-secondary">{{ pin.title}}</a></h1>
                 <p class="ps-3 pb-3 text-muted">
                     <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time> by [owner full name]</small>
                 </p>
