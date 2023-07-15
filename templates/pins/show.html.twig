@@ -13,7 +13,7 @@
                 </div>
                 <h1 class="h5 ps-3 pt-3"><a href="{{ path('app_pins_show', {id:pin.id }) }}" class="text-decoration-none text-secondary">{{ pin.title}}</a></h1>
                 <p class="ps-3 pb-3 text-muted">
-                    <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time> by [owner full name]</small>
+                    <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>, by {{ pin.user.firstName}} {{ pin.user.lastName}}</small>
                 </p>
                 <p class="ps-3 pb-3">{{ pin.description}}</p>
                 <div class="ps-3 pb-3">
