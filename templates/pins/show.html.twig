@@ -7,18 +7,18 @@
         <div class="col-md-6 mx-auto">
             <article class="pin bg-white rounded shadow">
                 <div class="mw-100 overflow-hidden rounded-top">
-                    <a href="{{ path('app_pins_show', {id:pin.id}) }}">
-                        <img src="{{ ( pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeHolder.png') ) | imagine_filter('square_thumbnail_small') }}"  alt="{{pin.title }}" class="w-100 rounded-top"/>
-                    </a>
+                    <img src="{{ ( pin.imageName ? vich_uploader_asset(pin) : asset('build/images/placeHolder.png') ) | imagine_filter('square_thumbnail_small') }}"  alt="{{pin.title }}" class="w-100 rounded-top"/>
                 </div>
-                <h1 class="h5 ps-3 pt-3"><a href="{{ path('app_pins_show', {id:pin.id }) }}" class="text-decoration-none text-secondary">{{ pin.title}}</a></h1>
-                <p class="ps-3 pb-3 text-muted">
-                    <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>, by {{ pin.user.firstName}} {{ pin.user.lastName}}</small>
-                </p>
-                <p class="ps-3 pb-3">{{ pin.description}}</p>
-                <div class="ps-3 pb-3">
-                    <a href="{{path('app_pins_edit', {id:pin.id}) }}" class="btn btn-light">Editer</a>
-                    <a href="#" onClick="event.preventDefault(); confirm('Etes-vous sûr ?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Supprimer</a>
+                <div class="p-3">
+                    <h1 class="h5 text-secondary">{{ pin.title}}</h1>
+                    <p class="text-muted">
+                        <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>, by {{ pin.user.firstName}} {{ pin.user.lastName}}</small>
+                    </p>
+                    <p class=" text-break">{{ pin.description}}</p>
+                    <div class="pt-3">
+                        <a href="{{path('app_pins_edit', {id:pin.id}) }}" class="btn btn-light">Editer</a>
+                        <a href="#" onClick="event.preventDefault(); confirm('Etes-vous sûr ?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Supprimer</a>
+                    </div>
                 </div>
             </article>
             <form id="js-pin-delete-form" action="{{path('app_pins_delete', {id:pin.id}) }}" method="post" style="display:none">
