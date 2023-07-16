@@ -16,9 +16,9 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 
-###> custom env vars ###
+###> custom git ignore ###
 /public/uploads/
-###< end custom env vars ###
+###< end custom git ignore # ##
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
