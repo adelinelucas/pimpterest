@@ -51,7 +51,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         // ajouter un message flash sur la page d'accueil 
-        $this->session->getFlashBag()->add('success', 'Connexion réussie!');
+        $this->session->getFlashBag()->add('success', $token->getUser()->getFullName() . ', connexion réussie!');
         
         // si on voulait aller sur une page spécifique, sans être connexté
         // après redirection vers la page de connexion, si connexion ok cela nous renvoie vers la page voulue initialement
