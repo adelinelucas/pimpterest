@@ -1,5 +1,5 @@
 {# gestion des messages flashs #}
-{% for type, messages in app.flashes %}
+{% for type, messages in app.flashes(['success', 'error', 'info']) %}
     {% for message in messages %}
         <div class="alert alert-{{type}}" role="alert">
             {{message}}
