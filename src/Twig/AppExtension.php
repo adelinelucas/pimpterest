@@ -2,6 +2,8 @@
 
 namespace App\Twig;
 
+use Symfony\Component\String\Inflector\EnglishInflector;
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -27,6 +29,9 @@ class AppExtension extends AbstractExtension
 
     public function doSomething(int $count, string $singular,?string $plural= null) : string
     {
+        // $inflector = new EnglishInflector();
+        // dd($inflector->singularize('teeth'));
+        // exit();
         $plural = $plural ?? $singular . 's' ;
         $str = $count ===1 ? $singular : $plural;
         return "$count $str "; 
