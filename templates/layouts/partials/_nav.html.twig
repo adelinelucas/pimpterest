@@ -15,11 +15,19 @@
             <a class="nav-link" href="#">Account</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_logout') }}?_csrf_token={{csrf_token('logout')}}" aria-disabled="true">Logout</a>
+          </li>
+          {# autre méthode avec le logout_path de twig
+          <li class="nav-item">
+            <a class="nav-link" href="{{ logout_path('main') }}" aria-disabled="true">Logout</a>
+          </li> #}
+          {# autre méthode 
+          <li class="nav-item">
             <a class="nav-link" href="#" aria-disabled="true" onclick="event.preventDefault(); document.getElementById('js-logout-form').submit();">Logout</a>
           </li>
           <form action="{{ path('app_logout')}}" style="display:none;" method="POST" id="js-logout-form">
             <input type="hidden"value={{ csrf_token('logout') }} name="_csrf_token">
-          </form>
+          </form> #}
         {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{{ path('app_register')}}">Register</a>
