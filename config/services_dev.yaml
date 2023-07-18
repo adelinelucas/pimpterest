@@ -1,0 +1,4 @@
+# customisation des paramètres du container
+# parameters:
+#     app_mail_from_name: 'Pimpterest'
+#     app_mail_from_adresse: 'noreply@pimpterest.com'
