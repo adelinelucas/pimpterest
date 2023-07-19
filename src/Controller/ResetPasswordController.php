@@ -142,6 +142,8 @@ class ResetPasswordController extends AbstractController
         $user = $this->entityManager->getRepository(User::class)->findOneBy([
             'email' => $emailFormData,
         ]);
+        // simplification - il faudra injecter dans la classe le user repository
+        // $user = $this->userRepository->findOneByEmail($emailFormData)
 
         // Do not reveal whether a user account was found or not.
         if (!$user) {
