@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Mon profil!' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto text-center">
+        <h1 class="text-center my-5">Profile</h1>
+
+        {# <img src="https://www.gravatar.com/avatar/{{ hashedEmail }}/?s=100" alt=""> #}
+        <img src="https://www.gravatar.com/avatar/{{ app.user.gravatar(100) }}/?s=100" alt="Avatar de {{ app.user.fullName}}" class="rounded-circle shadow">
+        <p class="lead mt-5">{{app.user.email }}</p>
+        <h2>{{app.user.getFullName }}</h2>
+        <p>
+            <a href="">Edit le compte</a>|<a href="">Changer le mot de passe</a>
+        </p>
+    </div>
+</div>
+{% endblock %}
