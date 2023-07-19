@@ -12,7 +12,7 @@
         <h2>{{app.user.getFullName }}</h2>
         <p><small>🕒 Compte crée le  {{app.user.createdAt|date('d/m/Y') }}</small></p>
         <p>
-            <a href="{{path('app_account_edit')}}">Edit le compte</a> | <a href="{{path('app_account_edit')}}">Changer le mot de passe</a>
+            <a href="{{path('app_account_edit')}}">Edit le compte</a> | <a href="{{path('app_account_change_password')}}">Changer le mot de passe</a>
         </p>
     </div>
 </div>
