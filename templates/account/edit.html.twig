@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title 'Editer - Mon profil!' %}
+{% block body %}
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1 class="text-center my-5">Mettre à jour Profile</h1>
+        {{ form_start(form) }}
+        <div class="row">
+            <div class="col-md-6">
+                {{ form_row(form.firstName) }}
+            </div>
+            <div class="col-md-6">
+                {{ form_row(form.lastName) }}
+            </div>
+        </div>
+            {{ form_rest(form) }}
+
+            <div class="d-grid gap-2">
+                <button typ="submit" class="btn btn-primary btn-lg">Appliquer les changements</button>
+            </div>
+       {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
