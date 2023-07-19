@@ -7,7 +7,7 @@
         <h1 class="text-center my-5">Profile</h1>
 
         {# <img src="https://www.gravatar.com/avatar/{{ hashedEmail }}?s=100" alt=""> #}
-        <img src="https://www.gravatar.com/avatar/{{ app.user.gravatar(100) }}/?s=100" alt="Avatar de {{ app.user.fullName}}" class="rounded-circle shadow">
+        <img src="{{ app.user.gravatarUrl(100) }}" alt="Avatar de {{ app.user.fullName}}" class="rounded-circle shadow">
         <p class="lead mt-5">{{app.user.email }}</p>
         <h2>{{app.user.getFullName }}</h2>
         <p><small>🕒 Compte crée le  {{app.user.createdAt|date('d/m/Y') }}</small></p>
