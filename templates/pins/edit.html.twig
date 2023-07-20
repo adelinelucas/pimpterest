@@ -6,6 +6,15 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
             <h1>Edit Pin # {{pin.id}} </h1>
+{# 
+            Faire des controles au niveau de twig
+            {% if is_granted('ROLE_USER') and app.user.isVerified and app.user == pin.user %}
+            <p>hello user 
+            {% endif %} #}
+            {% if is_granted('PIN_MANAGE', pin) %}
+                ici on est accessible à l'utilisateur identifié, vérifié et auteur du pin
+            {% endif %}
+
             {{ include('pins/_form.html.twig', {submitButtonText : "Mettre à jour le Pin"}) }}
         </div>
     </div>

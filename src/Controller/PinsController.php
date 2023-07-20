@@ -71,8 +71,10 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods="GET|POST")
-     * @Security("is_granted('ROLE_USER') && user.isVerified() == true && pin.getUser() == user", message="Accès interdit, vous n'êtes pas l'auteur du pin.", statusCode=404)
+     * @Security("is_granted('PIN_MANAGE', pin)")
      */
+    // autre méthode pour la gestion de la sécurité des autorisations
+    //   * @ Security("is_granted('ROLE_USER') && user.isVerified() == true && pin.getUser() == user", message="Accès interdit, vous n'êtes pas l'auteur du pin.", statusCode=404)
     public function edit(Request $request, EntityManagerInterface $em, Pin $pin): Response
     {
 
@@ -103,7 +105,7 @@ class PinsController extends AbstractController
 
     /**
      * @Route("/pins/{id<[0-9]+>}", name="app_pins_delete", methods="DELETE|POST")
-     * @Security("is_granted('ROLE_USER') && user.isVerified() == true && pin.getUser() == user", message="Accès interdit", statusCode=404)
+     * @Security("is_granted('PIN_MANAGE', pin)")
      */
     public function delete(Request $req, EntityManagerInterface $em, Pin $pin): Response
     {
