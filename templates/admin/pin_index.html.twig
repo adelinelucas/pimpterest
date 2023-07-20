@@ -2,5 +2,9 @@
 
 {% block title 'Admin Page' %}
 {% block body %}
-Pins index, role admin necessary
+    Pins index, role admin necessary
+    filter des actions visible uniquement pour certains utilisateurs. 
+    {% if is_granted('ROLE_ADMIN') %}
+        <p> paragraph réservé aux adminstrateur</p>
+    {% endif %}
 {% endblock %}

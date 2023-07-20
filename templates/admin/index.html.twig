@@ -2,5 +2,9 @@
 
 {% block title 'Admin Page' %}
 {% block body %}
-Hello admin controller
+    <p>Hello admin controller</p>
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <p> paragraph réservé aux adminstrateur</p>
+    {% endif %}
 {% endblock %}
