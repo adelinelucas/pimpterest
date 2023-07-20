@@ -1,0 +1,14 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %} 
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h1>Access Interdit</h1>
+        <h2>Le serveur a retourné une erreur "403 Forbiden"</h2>
+        <p>Vous ne pouvez pas accéder à cette page. 
+            <a href="{{path('app_home')}}">Retourner à la page d'accueil.</a>
+        </p>
+    </div>
+</div>
+
+{% endblock %}

@@ -43,6 +43,16 @@ class PinsController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            return $this->redirectToRoute('app_home');
+        }
 
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
@@ -73,6 +83,22 @@ class PinsController extends AbstractController
     public function edit(Request $request, EntityManagerInterface $em, Pin $pin): Response
     {
 
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            return $this->redirectToRoute('app_home');
+        }
+        // on check si l'utilisateur est l'auteur du pin
+        if($pin->getUser() !=$this->getUser() ){
+            $this->addFlash('error', 'Vous n\êtes pas l\'auteur du pin, vous ne pouvez pas le modifier.');
+            return $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(PinType::class, $pin, [
             // 'method' => 'PUT',
             // 'action" => 'adresse de l'action"
@@ -97,6 +123,21 @@ class PinsController extends AbstractController
      */
     public function delete(Request $req, EntityManagerInterface $em, Pin $pin): Response
     {
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            return $this->redirectToRoute('app_home');
+        }
+        // on check si l'utilisateur est l'auteur du pin
+        if($pin->getUser() !=$this->getUser() ){
+            $this->addFlash('error', 'Vous n\êtes pas l\'auteur du pin, vous ne pouvez pas le modifier.');
+            return $this->redirectToRoute('app_home');
+        }
         if($this->isCsrfTokenValid('pins.deletion' . $pin->getId(), $req->request->get('csrf_token') )){
             $em->remove($pin);
             $em->flush();

@@ -15,10 +15,12 @@
                         <small>Submitted <time datetime="{{pin.createdAt|date('Y-m-d H:i:s') }}">{{pin.createdAt|ago }}</time>, by {{ pin.user.firstName}} {{ pin.user.lastName}}</small>
                     </p>
                     <p class=" text-break">{{ pin.description}}</p>
+                    {% if app.user == pin.user %}
                     <div class="pt-3">
                         <a href="{{path('app_pins_edit', {id:pin.id}) }}" class="btn btn-light">Editer</a>
                         <a href="#" onClick="event.preventDefault(); confirm('Etes-vous sûr ?') && document.getElementById('js-pin-delete-form').submit();" class="btn btn-light">Supprimer</a>
                     </div>
+                    {% endif %}
                 </div>
             </article>
             <form id="js-pin-delete-form" action="{{path('app_pins_delete', {id:pin.id}) }}" method="post" style="display:none">

@@ -22,6 +22,12 @@ class AccountController extends AbstractController
      */
     public function profil(): Response
     {
+        // check is on un user de connecté
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+
         $hashedEmail = md5( strtolower( trim($this->getUser()->getEmail() ) ) );
         // $hashedEmail = md5( strtolower( 'eon.adelineeon@gmail.com' ) );
         return $this->render('account/profil.html.twig', [
@@ -35,6 +41,11 @@ class AccountController extends AbstractController
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
+        // check is on un user de connecté
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
         $user = $this->getUser();
         $form = $this->createForm(UserFormType::class, $user);
         $form->handleRequest($request);
@@ -58,6 +69,12 @@ class AccountController extends AbstractController
      */
     public function changePassword(Request $req, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
+        // check is on un user de connecté
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+
         $user = $this->getUser();
         $form = $this->createForm(ChangePasswordFormType::class,null, [
             'current_password_is_required' => true,
