@@ -12,13 +12,15 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class PinsController extends AbstractController
+/**
+ * @Route("/beforeRefactoring")
+ */
+class PinsController_beforeRefactoring extends AbstractController
 {
     /**
-     * @Route("/", name="app_home", methods="GET")
+     * @Route("/", name="app_home-beforeRefactoring", methods="GET")
      */
     public function index(PinRepository $pinRepo): Response
     {
@@ -30,7 +32,7 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show" , methods="GET", priority="-1")
+     * @Route("/pins/{id<[0-9]+>}", name="app_pins_show-beforeRefactoring" , methods="GET", priority="-1")
      */
     public function show(Pin $pin): Response
     {
@@ -40,11 +42,24 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/create", name="app_pins_create", methods="GET|POST", priority="1")
-     * @Security("is_granted('ROLE_USER') && user.isVerified()", message="Accès interdit", statusCode=404)
+     * @Route("/pins/create", name="app_pins_create-beforeRefactoring", methods="GET|POST", priority="1")
      */
     public function create(Request $request, EntityManagerInterface $em, UserRepository $userRepo): Response
     {
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            throw $this->createAccessDeniedException('text de denied access');
+            // $this->addFlash('error', 'Vous devez être connecté.');
+            // return $this->redirectToRoute('app_login');
+        }
+        // $this->denyAccessUnlessGranted('ROLE_USER');
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            throw $this->createAccessDeniedException('Vous devez avoir un compté vérifié.');
+
+            // $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            // return $this->redirectToRoute('app_home');
+        }
 
         $pin = new Pin;
         $form = $this->createForm(PinType::class, $pin);
@@ -70,12 +85,21 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit", methods="GET|POST")
-     * @Security("is_granted('ROLE_USER') && user.isVerified() == true && pin.getUser() == user", message="Accès interdit, vous n'êtes pas l'auteur du pin.", statusCode=404)
+     * @Route("/pins/{id<[0-9]+>}/edit", name="app_pins_edit-beforeRefactoring", methods="GET|POST")
      */
     public function edit(Request $request, EntityManagerInterface $em, Pin $pin): Response
     {
 
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            return $this->redirectToRoute('app_home');
+        }
         // on check si l'utilisateur est l'auteur du pin
         if($pin->getUser() !=$this->getUser() ){
             $this->addFlash('error', 'Vous n\êtes pas l\'auteur du pin, vous ne pouvez pas le modifier.');
@@ -102,11 +126,20 @@ class PinsController extends AbstractController
     }
 
     /**
-     * @Route("/pins/{id<[0-9]+>}", name="app_pins_delete", methods="DELETE|POST")
-     * @Security("is_granted('ROLE_USER') && user.isVerified() == true && pin.getUser() == user", message="Accès interdit", statusCode=404)
+     * @Route("/pins/{id<[0-9]+>}", name="app_pins_delete-beforeRefactoring", methods="DELETE|POST")
      */
     public function delete(Request $req, EntityManagerInterface $em, Pin $pin): Response
     {
+        // check is on un user est connecté 
+        if(! $this->getUser() ){
+            $this->addFlash('error', 'Vous devez être connecté.');
+            return $this->redirectToRoute('app_login');
+        }
+        // check is on un user est bien vérifié (email vérifié)
+        if(! $this->getUser()->isVerified() ){
+            $this->addFlash('error', 'Vous devez avoir un compté vérifié.');
+            return $this->redirectToRoute('app_home');
+        }
         // on check si l'utilisateur est l'auteur du pin
         if($pin->getUser() !=$this->getUser() ){
             $this->addFlash('error', 'Vous n\êtes pas l\'auteur du pin, vous ne pouvez pas le modifier.');
