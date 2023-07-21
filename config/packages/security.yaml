@@ -38,8 +38,16 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/account, roles: ROLE_USER }
+        # si l'on veut controller toutes les routes en les protégeant par défaut puis en défénissant des routes ouvertes meme si l'on est pas connecté.
+        # - { path: ^/login$, roles: IS_ANONYMOUS }
+        # - { path: ^/, roles: [ROLE_USER, ROLE_ADMIN  ] }
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
+    role_hierarchiy:
+        ROLE_ADMIN: [ROLE_USER, ROLE_ALLOWED_TO_SWITCH]
+    #     ROLE_PROF: [ROLE_DONNER_COURS, ROLE_ASSIGNER_NOTES]
+    #     // ici le role prof hérite de tous les autres roles 
+    #     ROLE_ELEVE: [ROLE_SUIVRE_COURS, ROLE_EXPOSE]
 
 when@test:
     security:
