@@ -2,15 +2,16 @@
 
 namespace App\Controller;
 
-use App\Form\ChangePasswordFormType;
 use App\Form\UserFormType;
 use App\Repository\UserRepository;
+use App\Form\ChangePasswordFormType;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @Route("/account")
@@ -18,7 +19,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class AccountController extends AbstractController
 {
     /**
-     * @Route("/", name="app_account")
+     * @Route("/", name="app_account", methods={"GET"})
+     * @IsGranted("ROLE_USER")
      */
     public function profil(): Response
     {
@@ -38,6 +40,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/edit", name="app_account_edit", methods={"GET", "POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function edit(Request $request, EntityManagerInterface $em): Response
     {
@@ -66,6 +69,7 @@ class AccountController extends AbstractController
 
     /**
      * @Route("/change-password", name="app_account_change_password", methods={"GET", "POST"})
+     * @IsGranted("IS_AUTHENTICATED_FULLY")
      */
     public function changePassword(Request $req, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
